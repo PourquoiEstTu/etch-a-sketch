@@ -21,7 +21,7 @@ function createGrid(size) {
     }
 }
 // default grid size
-createGrid(5);
+createGrid(100);
 
 const gridBtn = document.querySelector("button.grid");
 let gridSize;
@@ -72,3 +72,15 @@ randBtn.addEventListener("click", () => {
         }
     }
 });
+
+// const darkBtn = document.querySelector("button.darken");
+// darkBtn.addEventListener("click", () => {
+//     for (let row of rowDivs) {
+//         let newChildren = replaceChildren(row, "div");
+//         for (let child of newChildren) {
+//             child.addEventListener("mouseover", () => {
+
+//             });
+//         }
+//     }
+// })
