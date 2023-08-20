@@ -23,7 +23,7 @@ function createGrid(size) {
 // default grid size
 createGrid(100);
 
-const gridBtn = document.querySelector(".grid-size");
+const gridBtn = document.querySelector("button.grid");
 let gridSize;
 gridBtn.addEventListener("click", () => {
     for (row of rowDivs) {
@@ -42,4 +42,23 @@ gridBtn.addEventListener("click", () => {
     }
     gridSize = parseInt(gridSize);
     createGrid(gridSize);
+});
+
+const randBtn = document.querySelector("button.randomize");
+randBtn.addEventListener("click", () => {
+    for (row of rowDivs) {
+        let childDivs = row.getElementsByTagName("div");
+        for (child of childDivs) {
+            // child.removeEventListener("mouseover", () => child.style.setProperty("background-color", "purple"));
+            let newChild = child.cloneNode();
+            row.insertBefore(newChild, child);
+            row.removeChild(child);
+            newChild.addEventListener("mouseover", () => {
+                let r = Math.floor(Math.random() * 255);
+                let g = Math.floor(Math.random() * 255);
+                let b = Math.floor(Math.random() * 255);
+                newChild.style.setProperty("background-color", `rgb(${r}, ${g}, ${b})`);
+            })
+        }
+    }
 });
