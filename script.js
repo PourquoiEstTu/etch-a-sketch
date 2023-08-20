@@ -21,7 +21,7 @@ function createGrid(size) {
     }
 }
 // default grid size
-createGrid(100);
+createGrid(5);
 
 const gridBtn = document.querySelector("button.grid");
 let gridSize;
@@ -44,14 +44,17 @@ gridBtn.addEventListener("click", () => {
     createGrid(gridSize);
 });
 
+function replaceEventListener(element, event, eventFunc) {
+    element.addEventListener(event, eventFunc);
+}
+
 function insertNewChildElement(parent, element) {
-    let childDivs = parent.getElementsByTagName(`${element}`);
-    for (child of childDivs) {
+    let children = parent.getElementsByTagName(`${element}`);
+    for (child of children) {
         // child.removeEventListener("mouseover", () => child.style.setProperty("background-color", "purple"));
         let newChild = child.cloneNode();
         parent.insertBefore(newChild, child);
         parent.removeChild(child);
-        return newChild;
     }
 }
 
