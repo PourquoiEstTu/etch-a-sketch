@@ -44,21 +44,32 @@ gridBtn.addEventListener("click", () => {
     createGrid(gridSize);
 });
 
+function insertNewChildElement(parent, element) {
+    let childDivs = parent.getElementsByTagName(`${element}`);
+    for (child of childDivs) {
+        // child.removeEventListener("mouseover", () => child.style.setProperty("background-color", "purple"));
+        let newChild = child.cloneNode();
+        parent.insertBefore(newChild, child);
+        parent.removeChild(child);
+        return newChild;
+    }
+}
+
 const randBtn = document.querySelector("button.randomize");
 randBtn.addEventListener("click", () => {
     for (row of rowDivs) {
-        let childDivs = row.getElementsByTagName("div");
-        for (child of childDivs) {
-            // child.removeEventListener("mouseover", () => child.style.setProperty("background-color", "purple"));
-            let newChild = child.cloneNode();
-            row.insertBefore(newChild, child);
-            row.removeChild(child);
-            newChild.addEventListener("mouseover", () => {
-                let r = Math.floor(Math.random() * 255);
-                let g = Math.floor(Math.random() * 255);
-                let b = Math.floor(Math.random() * 255);
-                newChild.style.setProperty("background-color", `rgb(${r}, ${g}, ${b})`);
-            })
-        }
+        let newChild = insertNewChildElement(row, "div")
+        // let childDivs = row.getElementsByTagName("div");
+        // for (child of childDivs) {
+        //     // child.removeEventListener("mouseover", () => child.style.setProperty("background-color", "purple"));
+        //     let newChild = child.cloneNode();
+        //     row.insertBefore(newChild, child);
+        //     row.removeChild(child);
+        newChild.addEventListener("mouseover", () => {
+            let r = Math.floor(Math.random() * 255);
+            let g = Math.floor(Math.random() * 255);
+            let b = Math.floor(Math.random() * 255);
+            newChild.style.setProperty("background-color", `rgb(${r}, ${g}, ${b})`);
+        })
     }
 });
