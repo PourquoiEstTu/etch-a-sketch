@@ -13,15 +13,15 @@ function createGrid(size) {
         for (let j = 0; j < size; j++) {
             let div = document.createElement("div");
             div.classList.add("box");
-            div.style.cssText += "border: 2px solid red; margin: 0; flex: 1; ";
-            div.addEventListener("mouseover", () => div.style.setProperty("background-color", "yellow "));
-            div.addEventListener("mouseout", () => div.style.setProperty("background-color", "white"));
+            div.style.cssText += "flex: 1; ";
+            div.addEventListener("mouseover", () => div.style.setProperty("background-color", "purple"));
+            // div.addEventListener("mouseout", () => div.style.setProperty("background-color", "white"));
             rowDivs[i].appendChild(div);
         }
     }
 }
 // default grid size
-createGrid(10);
+createGrid(100);
 
 const gridBtn = document.querySelector(".grid-size");
 let gridSize;
@@ -32,10 +32,14 @@ gridBtn.addEventListener("click", () => {
         }
         row.remove();
     }
-    do {
-        gridSize = prompt("How many squares do you want on the grid? (Z x Z grid, choose Z)");
+    while (true) {
+        gridSize = prompt("How many squares do you want on the grid? (Z x Z grid, choose Z). Choose a Z which is at most 100.");
         // console.log(parseInt(gridSize));
-    }while(!parseInt(gridSize));
+        // console.log(parseInt(gridSize) > 100);
+        if (!parseInt(gridSize)) continue;
+        else if (parseInt(gridSize) > 100 || parseInt(gridSize) <= 0) continue;
+        else break;
+    }
     gridSize = parseInt(gridSize);
     createGrid(gridSize);
 });
