@@ -48,31 +48,44 @@ function replaceEventListener(element, event, eventFunc) {
     element.addEventListener(event, eventFunc);
 }
 
-function insertNewChildElement(parent, element) {
+function replaceChildren(parent, element, event, eventFunc) {
     let children = parent.getElementsByTagName(`${element}`);
+    let newChildren = [];
+    let count = 0;
     for (child of children) {
         // child.removeEventListener("mouseover", () => child.style.setProperty("background-color", "purple"));
         let newChild = child.cloneNode();
         parent.insertBefore(newChild, child);
         parent.removeChild(child);
+        newChildren[count++] = newChild;
     }
+    return newChildren;
 }
 
 const randBtn = document.querySelector("button.randomize");
 randBtn.addEventListener("click", () => {
     for (row of rowDivs) {
-        let newChild = insertNewChildElement(row, "div")
+        newChildren = replaceChildren(row, "div");
+        for (child of newChildren) {
+            console.log(child);
+            child.addEventListener("mouseover", () => {
+                let r = Math.floor(Math.random() * 255);
+                let g = Math.floor(Math.random() * 255);
+                let b = Math.floor(Math.random() * 255);
+                child.style.setProperty("background-color", `rgb(${r}, ${g}, ${b})`);
+            });
+        }
         // let childDivs = row.getElementsByTagName("div");
         // for (child of childDivs) {
         //     // child.removeEventListener("mouseover", () => child.style.setProperty("background-color", "purple"));
         //     let newChild = child.cloneNode();
         //     row.insertBefore(newChild, child);
         //     row.removeChild(child);
-        newChild.addEventListener("mouseover", () => {
-            let r = Math.floor(Math.random() * 255);
-            let g = Math.floor(Math.random() * 255);
-            let b = Math.floor(Math.random() * 255);
-            newChild.style.setProperty("background-color", `rgb(${r}, ${g}, ${b})`);
-        })
+        // newChild.addEventListener("mouseover", () => {
+        //     let r = Math.floor(Math.random() * 255);
+        //     let g = Math.floor(Math.random() * 255);
+        //     let b = Math.floor(Math.random() * 255);
+        //     newChild.style.setProperty("background-color", `rgb(${r}, ${g}, ${b})`);
+        // })
     }
 });
