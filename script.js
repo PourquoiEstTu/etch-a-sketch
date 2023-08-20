@@ -44,10 +44,6 @@ gridBtn.addEventListener("click", () => {
     createGrid(gridSize);
 });
 
-function replaceEventListener(element, event, eventFunc) {
-    element.addEventListener(event, eventFunc);
-}
-
 function replaceChildren(parent, element, event, eventFunc) {
     let children = parent.getElementsByTagName(`${element}`);
     let newChildren = [];
@@ -64,10 +60,9 @@ function replaceChildren(parent, element, event, eventFunc) {
 
 const randBtn = document.querySelector("button.randomize");
 randBtn.addEventListener("click", () => {
-    for (row of rowDivs) {
-        newChildren = replaceChildren(row, "div");
-        for (child of newChildren) {
-            console.log(child);
+    for (let row of rowDivs) {
+        let newChildren = replaceChildren(row, "div");
+        for (let child of newChildren) {
             child.addEventListener("mouseover", () => {
                 let r = Math.floor(Math.random() * 255);
                 let g = Math.floor(Math.random() * 255);
