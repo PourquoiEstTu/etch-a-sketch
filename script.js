@@ -44,7 +44,7 @@ gridBtn.addEventListener("click", () => {
     createGrid(gridSize);
 });
 
-function replaceChildren(parent, element, event, eventFunc) {
+function replaceChildren(parent, element) {
     let children = parent.getElementsByTagName(`${element}`);
     let newChildren = [];
     let count = 0;
